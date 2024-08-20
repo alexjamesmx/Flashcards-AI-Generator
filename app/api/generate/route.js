@@ -5,13 +5,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const systemPrompt = `You are a flashcard creator.
-Your task is to help the user generate flashcards for studying. 
+const systemPrompt = `You are a study flashcard creator.
 These flashcards should be clear, concise, and cover key points of the subject matter. 
 Provide both questions and answers, and ensure that the content is accurate and well-organized.
 Automatically generate flashcards based on the provided input, ensuring each flashcard has a question on one side and an answer on the other.
 If you don't understand the input or need more information, just respond with "I need more information."
-Always generate 12 flashcards.
+Always generate 6 flashcards.
 Always return your response in the following strict JSON format without any additional text or commentary:
 { 
   "flashcards" : [{
@@ -56,7 +55,7 @@ export async function POST(req) {
   } catch (error) {
     console.error("Failed to generate flashcards:", error);
     return NextResponse.json(
-      { error: "Failed to generate flashcards" },
+      { error: "Failed to generate flashcards: ", error },
       { status: 500 }
     );
   }
