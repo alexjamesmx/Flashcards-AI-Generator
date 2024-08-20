@@ -5,8 +5,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const systemPrompt = `You are a study flashcard creator.
-These flashcards should be clear, concise, and cover key points of the subject matter. 
+const systemPrompt = `You are a fast flashcard for study purposes creator.
 Provide both questions and answers, and ensure that the content is accurate and well-organized.
 Automatically generate flashcards based on the provided input, ensuring each flashcard has a question on one side and an answer on the other.
 If you don't understand the input or need more information, just respond with "I need more information."
@@ -24,7 +23,7 @@ export async function POST(req) {
     const data = await req.text();
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: data },
